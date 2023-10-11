@@ -37,3 +37,35 @@ result = divide(10, 2)
 if result is not None:
     logger.info(f"Result of division: {result}")
 
+
+import logging
+from logging.handlers import TimedRotatingFileHandler
+import os
+
+# Create a directory to store log files (if it doesn't exist)
+log_dir = 'logs'
+os.makedirs(log_dir, exist_ok=True)
+
+# Initialize the logger
+logger = logging.getLogger('my_logger')
+logger.setLevel(logging.DEBUG)
+
+# Create a rotating file handler
+log_file = os.path.join(log_dir, 'app.log')
+file_handler = TimedRotatingFileHandler(log_file, when='midnight', interval=1, backupCount=7, utc=True)
+
+# Create a formatter for the log entries
+log_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+file_handler.setFormatter(log_formatter)
+
+# Add the file handler to the logger
+logger.addHandler(file_handler)
+
+# Log various messages
+logger.debug('This is a debug message')
+logger.info('This is an info message')
+logger.warning('This is a warning message')
+logger.error('This is an error message')
+logger.critical('This is a critical message')
+
+

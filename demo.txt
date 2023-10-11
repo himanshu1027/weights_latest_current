@@ -69,3 +69,42 @@ logger.error('This is an error message')
 logger.critical('This is a critical message')
 
 
+
+
+
+
+
+
+
+
+
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
+from googleapiclient.http import MediaFileUpload
+
+# Path to your service account JSON key file
+credentials_file = "/content/starry-antonym-396712-9eb1035049c1.json"
+folder_id = "17Y7xKiC0sNc1-Q7-m0YKDW5RC7rtfjR6"  # ID of the Google Drive folder where you want to save images
+
+# Create a Google Drive API client
+credentials = service_account.Credentials.from_service_account_file(credentials_file, scopes=['https://www.googleapis.com/auth/drive'])
+drive_service = build('drive', 'v3', credentials=credentials)
+
+# Upload an image to the folder
+file_metadata = {
+    'name': '/content/test_image.jpg',  # Name for the image in Google Drive
+    'parents': [folder_id]  # ID of the target folder
+}
+media = MediaFileUpload('/content/test_image.jpg', mimetype='image/jpeg')
+uploaded_file = drive_service.files().create(body=file_metadata, media_body=media).execute()
+
+file_id = uploaded_file['id']
+
+# Build the file URL
+file_url = f'https://drive.google.com/uc?id={file_id}'
+
+print(file_url,'file_url')
+
+print('File ID: %s' % uploaded_file.get('id'))
+
+

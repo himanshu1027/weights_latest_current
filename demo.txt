@@ -108,3 +108,35 @@ print(file_url,'file_url')
 print('File ID: %s' % uploaded_file.get('id'))
 
 
+
+# YOLOv8 configuration file
+# ...
+augmentation:
+  mosaic: 1
+  mixup: 1
+  flip: 1
+  rotate: 1
+  scale: 1
+  shear: 1
+  hsv: 1
+  cutout: 1
+  cutmix: 1
+  perspective: 1
+  affine: 1
+  elastic: 1
+  gridmask: 1
+  random_erasing: 1
+  random_patch: 1
+  random_resize_crop: 1
+  random_sized_crop: 1
+  random_affine: 1
+  random_distortion: 1
+  random_flip: 1
+  random_rotate: 1
+  random_shear: 1
+  random_translate: 1
+
+
+!wget -P build/darknet/x64/ https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.conv.137
+
+
